@@ -16,6 +16,7 @@ import {HeroSearchComponent} from './hero-search/hero-search.component';
 import {MessagesComponent} from './messages/messages.component';
 import {HeroService} from './hero-service/hero.service';
 import {MessageService} from './message-service/message.service';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import {MessageService} from './message-service/message.service';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    NavBarComponent
   ],
   bootstrap: [AppComponent]
 })
