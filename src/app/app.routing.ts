@@ -8,7 +8,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 const appRoutes: Routes = [
     {
       path: '',
-      component : HeroesComponent,
+      component : AppComponent,
     },
 
   ];
