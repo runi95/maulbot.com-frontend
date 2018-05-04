@@ -5,7 +5,7 @@ import {
 } from 'rxjs/operators';
 
 import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { HeroService } from '../hero-service/hero.service';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
