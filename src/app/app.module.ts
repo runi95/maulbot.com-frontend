@@ -19,12 +19,15 @@ import {MessageService} from './message-service/message.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule.forRoot(),
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
