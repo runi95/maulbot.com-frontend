@@ -1,3 +1,73 @@
-<p>
-  nav-bar works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <a class="navbar-brand" href="/"><img src="assets/img/maulbot.svg"/></a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+        <a class="nav-link" href="/">
+          <i class="fa fa-fw fa-home"></i>
+          <span class="nav-link-text">Home</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Updates">
+        <a class="nav-link" href="{% url 'polls:blog_index' %}">
+          <i class="fas fa-fw fa-list-ul"></i>
+          <span class="nav-link-text">Updates</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Suggestions">
+        <a class="nav-link" href="{% url 'polls:suggestions' %}">
+          <i class="fa fa-fw fa-table"></i>
+          <span class="nav-link-text">Suggestions</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Discord">
+        <a class="nav-link" href="https://discord.gg/4Ng3VgE" target="_blank">
+          <i class="fab fa-fw fa-discord"></i>
+          <span class="nav-link-text">Discord</span>
+        </a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav sidenav-toggler">
+      <li class="nav-item">
+        <a class="nav-link text-center" id="sidenavToggler">
+          <i class="fa fa-fw fa-angle-left"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+
+
+
+      <!--{% if not user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#loginModal">
+          <i class="fa fa-fw fa-sign-in"> </i>Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#registermodal">
+          <i class="fa fa-fw fa-user-plus"> </i>Register</a>
+      </li>
+      {% else %}
+      <li class="nav-item dropdown" id="notifications">
+      </li>
+      {% if request.user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">
+          <i class="fa fa-fw fa-dashboard"> </i>DjangoCP</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+
+        <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+          <i class="fa fa-fw fa-sign-out"> </i>Logout</a>
+      </li>
+      {% endif %}-->
+    </ul>
+  </div>
+</nav>
