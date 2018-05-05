@@ -20,6 +20,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { GameTableComponent } from './game-table/game-table.component';
+import {DjangoClientService} from './django-client/django-client.service';
 
 @NgModule({
   imports: [
@@ -28,18 +30,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     NgbModule.forRoot(),
-
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    )
   ],
   providers: [
     HeroService,
     MessageService,
     InMemoryDataService,
+    DjangoClientService,
   ],
   declarations: [
     AppComponent,
@@ -49,7 +45,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MessagesComponent,
     HeroSearchComponent,
     NavBarComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    GameTableComponent
   ],
   bootstrap: [AppComponent]
 })
