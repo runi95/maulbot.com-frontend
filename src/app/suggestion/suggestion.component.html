@@ -12,7 +12,7 @@
 
         <div class="card mx-auto mb-3">
           <div class="card-header">
-            <i class="fa fa-bar-chart"></i> Add Suggestion
+            <i class="fas fa-chart-bar"></i> Add Suggestion
           </div>
           <div class="card-body">
             <form (ngSubmit)="onSubmit()" #suggestion="ngForm">
@@ -45,7 +45,7 @@
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">
-            <i class="fa fa-bell-o"></i> Your Suggestions
+            <i class="far fa-bell"></i> Your Suggestions
           </div>
           <div class="list-group list-group-flush small">
             <!-- TODO: Add currently logged in user's suggestions here! -->
@@ -55,7 +55,7 @@
       <div class="col-lg-12">
         <div class="card mb-3">
           <div class="card-header">
-            <i class="fa fa-bell-o"></i> Accepted Suggestions
+            <i class="far fa-bell"></i> Accepted Suggestions
           </div>
           <div class="list-group list-group-flush small">
             <div *ngFor="let suggestion of suggestions" class="list-group-item list-group-item-action">
