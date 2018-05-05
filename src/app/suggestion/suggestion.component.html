@@ -1,3 +1,4 @@
+<!--
 <div class="row">
   <div class="col-12">
     <section class="jumbotron text-center">
@@ -6,12 +7,10 @@
         <p class="lead text-muted">Your suggestions help us greatly with all kinds of development.</p>
       </div>
     </section>
-    <!--
     TODO: Check if user is authenticated!
     <div class="alert alert-warning text-center" role="alert">
       You need to be logged in to post/view your suggestions.
     </div>
-    -->
     <div class="row">
       <div class="col-lg-8">
 
@@ -20,27 +19,24 @@
             <i class="fa fa-bar-chart"></i> Add Suggestion
           </div>
           <div class="card-body">
-            <form method="post" action="${posturl}">
-            <!-- csrf? -->
-
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="exampleInputPassword1">Title</label>
-                  {{ formset.title }}
-
-                </div>
-                <div class="col-md-6">
-                  <label for="exampleConfirmPassword">Type of suggestion</label>
-                  {{ formset.type }}
+            <form method="post" action="{{posturl}}">
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="title">Title</label>
+                    <input id="title" [(ngModel)]="suggestion.title">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="type">Type of suggestion</label>
+                    <input id="type" [(ngModel)]="suggestion.type">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Explanation/Description</label>
-              {{ formset.text }}
-            </div>
-            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
+              <div class="form-group">
+                <label for="desc">Explanation/Description</label>
+                <input id="desc" [(ngModel)]="suggestion.type">
+              </div>
+              <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
             </form>
           </div>
         </div>
@@ -52,53 +48,36 @@
             <i class="fa fa-bell-o"></i> Your Suggestions
           </div>
           <div class="list-group list-group-flush small">
-            <!--{% if userSuggested %}-->
             <div *ngFor="let suggestion of suggestionList">
-            <!-- Modal -->
-            <div class="modal fade" id="modalUser{{ suggestion.id }}" tabindex="-1"
-                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog suggmodal" role="document">
-                <div class="modal-content">
-                  <!--{% include 'MaulBotApp/extra/suggestion.html' %}-->
+              <div class="modal fade" id="modalUser{{ suggestion.id }}" tabindex="-1"
+                   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog suggmodal" role="document">
+                  <div class="modal-content">
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- endModal -->
 
-            <a class="list-group-item list-group-item-action" data-toggle="modal"
-               data-target="#modalUser{{ suggestion.id }}">
-              <div class="media">
+              <a class="list-group-item list-group-item-action" data-toggle="modal"
+                 data-target="#modalUser{{ suggestion.id }}">
+                <div class="media">
                                             <span class="d-flex mr-3 rounded-circle  text-center"
-                                                  style="text-align: center;width: 45px;color: {{ suggestion.status_colour }};">
-                                                <i class="fa [class.fa-aling-justify]=""
-                                                {% if suggestion.type == "TEXT" %}
-                                                    fa-align-justify
-                                                {% elif suggestion.type == "BUG" %}
-                                                    fa-bug
-                                                {% elif suggestion.type == "IM" %}
-                                                    fa-code-fork
-                                                {% else %}
-                                                    fa-info
-                                                {% endif %}"
-                                                   style="display:inline-block;font-size: 45px;width: 45px;height: 45px;text-align: center;vertical-align: bottom;"
-                                                   aria-hidden="true"></i>
+                                                  style="text-align: center;width: 45px;" [style.color]="{{getSuggestionColor()}}">
                                             </span>
-                <div class="media-body">
-                  {% if suggestion.approved %}
-                  <strong>{{ suggestion.approved_by }}</strong> Approved your
-                  suggestion: <strong>{{ suggestion.title }}</strong>
-                  {% else %}
-                  <strong>You</strong> posted a suggestion:
-                  <strong>{{ suggestion.title }}</strong>
-                  {% endif %}
+                  <div class="media-body">
+                    {% if suggestion.approved %}
+                    <strong>{{ suggestion.approved_by }}</strong> Approved your
+                    suggestion: <strong>{{ suggestion.title }}</strong>
+                    {% else %}
+                    <strong>You</strong> posted a suggestion:
+                    <strong>{{ suggestion.title }}</strong>
+                    {% endif %}
 
-                  <div class="text-muted smaller">{{ suggestion.pub_date|naturaltime }}</div>
+                    <div class="text-muted smaller">{{ suggestion.pub_date|naturaltime }}</div>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
             </div>
             {% endfor %}
-            <!--{% endif %}-->
             {% if suggestionsCount > 6 %}
             <a class="list-group-item list-group-item-action" href="#">View all of your
               suggestions...</a>
@@ -111,60 +90,37 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <!-- Example Notifications Card-->
         <div class="card mb-3">
           <div class="card-header">
             <i class="fa fa-bell-o"></i> Accepted Suggestions
           </div>
           <div class="list-group list-group-flush small">
-            {% if approvedSuggestions %}
-            {% for suggestion in approvedSuggestions %}
+            <div *ngFor="let suggestion of suggestions">
 
-            <!-- Modal -->
-            <div class="modal fade" id="modalApproved{{ suggestion.id }}" tabindex="-1"
-                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog suggmodal" role="document">
-                <div class="modal-content">
-                  {% include 'MaulBotApp/extra/suggestion.html' %}
-                </div>
-              </div>
-            </div>
-            <!-- endModal -->
-
-            <a class="list-group-item list-group-item-action" data-toggle="modal"
-               data-target="#modalApproved{{ suggestion.id }}">
-              <div class="media">
-                                            <span class="d-flex mr-3 rounded-circle  text-center"
-                                                  style="text-align: center;width: 45px; color: {{ suggestion.status_colour }}">
-                                                <i class="fa
-                                                {% if suggestion.type == "TEXT" %}
-                                                    fa-align-justify
-                                                {% elif suggestion.type == "BUG" %}
-                                                    fa-bug
-                                                {% elif suggestion.type == "IM" %}
-                                                    fa-code-fork
-                                                {% else %}
-                                                    fa-info
-                                                {% endif %}"
-                                                   style="display:inline-block;font-size: 45px;width: 45px;height: 45px;text-align: center;vertical-align: bottom;"
-                                                   aria-hidden="true"></i>
-                                            </span>
-                <div class="media-body">
-                  <strong>{{ suggestion.user }}</strong> suggested:
-                  <strong>{{ suggestion.title }}</strong>
-                  <div class="text-muted smaller">Approved by
-                    <b>{{ suggestion.approved_by }}</b>
-                    ({{ suggestion.pub_date|naturaltime }})
+              <div class="modal fade" id="modalApproved{{ suggestion.id }}" tabindex="-1"
+                   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog suggmodal" role="document">
+                  <div class="modal-content">
                   </div>
                 </div>
               </div>
-            </a>
-            {% endfor %}
-            {% endif %}
-            {% if suggestionsCount > 6 %}
-            <a class="list-group-item list-group-item-action" href="#">View all of your
-              suggestions...</a>
-            {% endif %}
+              <a class="list-group-item list-group-item-action" data-toggle="modal"
+                 data-target="#modalApproved{{ suggestion.id }}">
+                <div class="media">
+                                            <span class="d-flex mr-3 rounded-circle  text-center"
+                                                  style="text-align: center; width: 45px; color: {{ getSuggestionColor() }}">
+                                            </span>
+                  <div class="media-body">
+                    <strong>{{ suggestion.user }}</strong> suggested:
+                    <strong>{{ suggestion.title }}</strong>
+                    <div class="text-muted smaller">Approved by
+                      <b>{{ suggestion.approved_by }}</b>
+                      ({{ suggestion.pub_date|naturaltime }})
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -174,3 +130,4 @@
 
   </div>
 </div>
+-->

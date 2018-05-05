@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AppComponent} from '../app.component';
 import {Suggestion} from '../suggestion';
-
-const posturl = '/postsuggestion';
-const passreseturl = '/passreset';
-const registerurl = '/register';
 
 @Component({
   selector: 'app-suggestion',
@@ -13,11 +8,17 @@ const registerurl = '/register';
 })
 export class SuggestionComponent implements OnInit {
 
-  suggestionList: Suggestion[];
+  suggestionList: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 'bestType', description: 'bestDescription'}];
+  posturl = '/postsuggestion';
+  passreseturl = '/passreset';
+  registerurl = '/register';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getSuggestionColor(): void {
   }
 
 }
