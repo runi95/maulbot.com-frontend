@@ -7,6 +7,8 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './inMemoryData-service/in-memory-data.service';
 
 import {AppRoutingModule} from './app-routing.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -19,7 +21,8 @@ import {MessageService} from './message-service/message.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
 import { GameTableComponent } from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
 import {SuggestionsService} from './suggestions-service/suggestions.service';
@@ -48,7 +51,8 @@ import {SuggestionsService} from './suggestions-service/suggestions.service';
     HeroSearchComponent,
     NavBarComponent,
     SuggestionComponent,
-    GameTableComponent
+    GameTableComponent,
+    TimeAgoPipe
   ],
   bootstrap: [AppComponent]
 })
