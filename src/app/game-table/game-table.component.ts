@@ -7,8 +7,10 @@ import {getOrSetAsInMap} from '@angular/animations/browser/src/render/shared';
   templateUrl: './game-table.component.html',
   styleUrls: ['./game-table.component.css']
 })
+
 export class GameTableComponent implements OnInit {
   gamelist = [];
+
 
   constructor(private djangoClientService: DjangoClientService) {
   }
