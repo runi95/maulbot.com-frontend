@@ -10,8 +10,7 @@ export class SuggestionComponent implements OnInit {
 
   typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)']
   userSuggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}];
-  passreseturl = '/passreset';
-  registerurl = '/register';
+  suggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}]
 
   constructor() { }
 
