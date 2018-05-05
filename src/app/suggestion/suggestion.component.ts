@@ -8,8 +8,8 @@ import {Suggestion} from '../suggestion';
 })
 export class SuggestionComponent implements OnInit {
 
-  suggestionList: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 'bestType', description: 'bestDescription'}];
-  posturl = '/postsuggestion';
+  typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)']
+  userSuggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}];
   passreseturl = '/passreset';
   registerurl = '/register';
 
@@ -18,7 +18,12 @@ export class SuggestionComponent implements OnInit {
   ngOnInit() {
   }
 
-  getSuggestionColor(): void {
+  getSuggestionColor(): string {
+    return 'red';
+  }
+
+  onSubmit(): void {
+
   }
 
 }

@@ -1,7 +1,9 @@
 export class Suggestion {
-  id: number;
-  status: number;
-  title: string;
-  type: string;
-  description: string;
+  constructor(
+    public id: number,
+    public status: number,
+    public type: number,
+    public title: string,
+    public description: string
+  ) { }
 }
