@@ -1,9 +1,11 @@
 export class Suggestion {
   constructor(
-    public id: number,
-    public status: number,
-    public type: number,
     public title: string,
-    public description: string
+    public text: string,
+    public type: string,
+    public unixTime: string,
+    public status: number,
+    public submittedby: string,
+    public approvedby: string,
   ) { }
 }

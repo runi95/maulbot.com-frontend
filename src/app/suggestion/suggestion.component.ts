@@ -10,7 +10,7 @@ import {SuggestionsService} from '../suggestions-service/suggestions.service';
 export class SuggestionComponent implements OnInit {
 
   typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)']
-  userSuggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}];
+  userSuggestions: Suggestion[];
   suggestions: Suggestion[];
 
   constructor(private suggestionsService: SuggestionsService) { }
@@ -20,11 +20,31 @@ export class SuggestionComponent implements OnInit {
   }
 
   showSuggestion() {
-    this.suggestionsService.getUrl().subscribe((data: Suggestion[]) => this.suggestions = data);
+    return this.suggestionsService.getUrl().subscribe((data: Suggestion[]) => this.suggestions = data);
   }
 
-  getSuggestionColor(): string {
-    return 'red';
+  getSuggestionColor(status: number): string {
+    if(status === 1) {
+      return 'GoldenRod';
+    } else if(status === 2) {
+      return 'green';
+    } else {
+      return 'GoldenRod';
+    }
+  }
+
+  getSuggestionClass(type: string): string {
+    if (type === 'TEXT') {
+      return 'fas fa-align-justify';
+    } else if (type === 'BUG') {
+      return 'fas fa-bug';
+    } else if (type === 'IM') {
+      return 'fas fa-code-branch';
+    } else if (type === 'OTR') {
+      return 'fas fa-info';
+    } else {
+      return 'fas fa-question';
+    }
   }
 
   onSubmit(): void {

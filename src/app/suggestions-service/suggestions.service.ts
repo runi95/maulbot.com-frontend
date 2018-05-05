@@ -5,7 +5,7 @@ import {Suggestion} from '../suggestion';
 @Injectable()
 export class SuggestionsService {
 
-  apiUrl = 'https://maulbot.com/api/suggestions?format=json';
+  apiUrl = 'https://maulbot.com/api/suggestions';
 
   constructor(private http: HttpClient) { }
 
