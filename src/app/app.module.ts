@@ -22,6 +22,7 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GameTableComponent } from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
+import {SuggestionsService} from './suggestions-service/suggestions.service';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {DjangoClientService} from './django-client/django-client.service';
   providers: [
     HeroService,
     MessageService,
+    SuggestionsService,
     InMemoryDataService,
     DjangoClientService,
   ],

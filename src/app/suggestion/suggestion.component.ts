@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Suggestion} from '../suggestion';
+import {SuggestionsService} from '../suggestions-service/suggestions.service';
 
 @Component({
   selector: 'app-suggestion',
@@ -10,11 +11,16 @@ export class SuggestionComponent implements OnInit {
 
   typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)']
   userSuggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}];
-  suggestions: Suggestion[] = [{id: 1, status: 2, title: 'BestTitle', type: 2, description: 'bestDescription'}]
+  suggestions: Suggestion[];
 
-  constructor() { }
+  constructor(private suggestionsService: SuggestionsService) { }
 
   ngOnInit() {
+    this.showSuggestion();
+  }
+
+  showSuggestion() {
+    this.suggestionsService.getUrl().subscribe((data: Suggestion[]) => this.suggestions = data);
   }
 
   getSuggestionColor(): string {
