@@ -71,7 +71,12 @@
                   <strong>{{ suggestion.title }}</strong>
                   <div class="text-muted smaller">Approved by
                     <b>{{ suggestion.approvedby }}</b>
-                    ({{ suggestion.unixTime }})
+                    ({{ suggestion.unixTime*1000 | timeAgo }})
+
+
+
+
+
                   </div>
                 </div>
               </div>
