@@ -6,10 +6,10 @@ import {getOverloadKey} from 'tslint/lib/rules/adjacentOverloadSignaturesRule';
 
 @Component({
   selector: 'app-suggestion',
-  templateUrl: './suggestion.component.html',
-  styleUrls: ['./suggestion.component.css']
+  templateUrl: './suggestions.component.html',
+  styleUrls: ['./suggestions.component.css']
 })
-export class SuggestionComponent implements OnInit {
+export class SuggestionsComponent implements OnInit {
 
   selectedSuggestion: Suggestion;
   typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)'];
