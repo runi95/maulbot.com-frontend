@@ -26,6 +26,7 @@ import { GameTableComponent } from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
 import {SuggestionsService} from './suggestions-service/suggestions.service';
 import { BlogpostComponent } from './blogpost/blogpost.component';
+import { BlogpostsComponent } from './blogposts/blogposts.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { BlogpostComponent } from './blogpost/blogpost.component';
     GameTableComponent,
     TimeAgoPipe,
     BlogpostComponent,
+    BlogpostsComponent,
   ],
   bootstrap: [AppComponent]
 })
