@@ -9,22 +9,22 @@
 
   <div class="row">
     <div class="col-lg-10 col-md-12 mx-auto">
-      <div *ngFor="let post of posts" class="post-preview">
-        <a href="#" style="color: #212529; font-size: 36px; font-weight: 800;">
-          <h2 class="post-title">
-            {{ post.title }}
-          </h2>
-        </a>
-        <p class="post-meta"><span style="color: #868e96">Posted by </span>
-          <a href="#" style="color: #212529">{{ post.username }}</a>
-          <span style="color: #868e96"> on {{ post.published_date }}</span></p>
-        <hr>
+      <div *ngFor="let post of posts; let i = index" class="post-preview">
+        <div *ngIf="shouldShow(i)">
+          <a href="#" style="color: #212529; font-size: 36px; font-weight: 800;">
+            <h2 class="post-title">
+              {{ post.title }}
+            </h2>
+          </a>
+          <p class="post-meta"><span style="color: #868e96">Posted by </span>
+            <a href="#" style="color: #212529">{{ post.username }}</a>
+            <span style="color: #868e96"> on {{ post.published_date }}</span></p>
+          <hr>
+        </div>
       </div>
 
-      <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" [maxSize]="5" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
-      <!--
-      <ngb-pagination [collectionSize]="120" [(page)]="posts" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-      -->
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [rotate]="true" [pageSize]="pageSize"
+                      [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
     </div>
   </div>
 </div>

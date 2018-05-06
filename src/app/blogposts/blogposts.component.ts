@@ -12,27 +12,31 @@ export class BlogpostsComponent implements OnInit {
 
   posts: Blogpost[];
 
-  itemsPerPage: number;
-  totalItems: any;
-  page: any;
-  previousPage: any;
+  pageSize = 5;
+  collectionSize: number;
+  page = 1;
 
-  constructor(private blogpostService: BlogpostsService) {
+  constructor(private blogpostService: BlogpostsService, private pagerService: PaginationserviceService) {
     this.getBlogposts();
   }
 
   ngOnInit() {}
 
+  shouldShow(index: number): boolean {
+    const indexPage: number = Math.floor(index / this.pageSize) + 1;
+    if(this.page === indexPage) {
+      return true;
+    }
+
+    return false;
+  }
+
   getBlogposts() {
     return this.blogpostService.getUrl().subscribe((data: Blogpost[]) => {
       this.posts = data;
+      this.collectionSize = this.posts.length;
     });
   }
 
-  loadPage(page: number) {
-    if (page !== this.previousPage) {
-      this.previousPage = page;
-      this.getBlogposts();
-    }
-  }
+
 }
