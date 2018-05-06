@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Blogpost} from '../blogposts-service/blogpost';
+import {BlogpostsService} from '../blogposts-service/blogposts.service';
+import {PaginationserviceService} from '../paginationservice/paginationservice.service';
 
 @Component({
   selector: 'app-blogposts',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogpostsComponent implements OnInit {
 
-  constructor() { }
+  posts: Blogpost[];
 
-  ngOnInit() {
+  itemsPerPage: number;
+  totalItems: any;
+  page: any;
+  previousPage: any;
+
+  constructor(private blogpostService: BlogpostsService) {
+    this.getBlogposts();
   }
 
+  ngOnInit() {}
+
+  getBlogposts() {
+    return this.blogpostService.getUrl().subscribe((data: Blogpost[]) => {
+      this.posts = data;
+    });
+  }
+
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.getBlogposts();
+    }
+  }
 }

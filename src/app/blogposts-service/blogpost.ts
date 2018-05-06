@@ -1,5 +1,5 @@
 export class Blogpost {
   title: string;
   username: string;
-  // published_date: timestamp;
+  published_date: string;
 }

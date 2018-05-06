@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Blogpost} from './blogpost';
 
 @Injectable()
 export class BlogpostsService {
@@ -9,7 +10,7 @@ export class BlogpostsService {
   constructor(private http: HttpClient) { }
 
   getUrl() {
-    return this.http.get<String[]>(this.apiUrl);
+    return this.http.get<Blogpost[]>(this.apiUrl);
   }
 
 }
