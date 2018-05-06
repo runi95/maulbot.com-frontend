@@ -17,16 +17,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="lead">{{selectedSuggestion.submittedby}}</p>
+        <p class="lead">{{selectedSuggestion.submittedby}} - {{statusOptions[selectedSuggestion.status]}} </p>
         <form (ngSubmit)="onSubmit()" #status="ngForm">
           <select class="form-check-inline">
-            <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
+            <option *ngFor="let status of statusOptions; let i = index" [value]="status" [attr.selected]="selectedSuggestion.status==i ? true : null">{{status}}</option>
           </select>
         </form>
         <hr>
         <p>Posted on {{selectedSuggestion.unixTime * 1000 | date:'medium'}}</p>
         <hr>
-        <p>{{selectedSuggestion.text}}</p>
+        <p ng-bind="textFromJSON" style="white-space:pre-wrap">{{selectedSuggestion.text}}</p>
         <hr>
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>

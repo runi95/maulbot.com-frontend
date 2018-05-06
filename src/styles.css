@@ -504,6 +504,6 @@ footer.sticky-footer {
   }
 }
 
-.suggmodal{
-  max-width: 70%!important;
+.modal-vl {
+  max-width: 1300px
 }

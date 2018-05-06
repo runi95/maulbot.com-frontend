@@ -30,14 +30,25 @@ export class SuggestionComponent implements OnInit {
   }
 
   getSuggestionColor(status: number): string {
-    if(status === 1) {
-      return 'GoldenRod';
-    } else if(status === 2) {
-      return 'green';
-    } else {
-      return 'GoldenRod';
+    switch(status) {
+      case 0: {
+        return 'black';
+      }
+      case 1: {
+        return 'GoldenRod';
+      }
+      case 2: {
+        return 'green';
+      }
+      case 3: {
+        return 'red';
+      }
+      case 4: {
+        return 'teal';
+      }
     }
   }
+
 
   getSuggestionClass(type: string): string {
     if (type === 'TEXT') {
@@ -69,7 +80,7 @@ export class SuggestionComponent implements OnInit {
 
   open(suggestion: Suggestion, content) {
     this.selectedSuggestion = suggestion;
-    this.modalService.open(content, {size: 'lg'}).result.then((result) => {
+    this.modalService.open(content, {size: 'vl', backdropClass: 'SuggestionModal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
