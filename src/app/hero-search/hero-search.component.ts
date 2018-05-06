@@ -6,8 +6,7 @@ import {
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero-service/hero.service';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
+import {Subject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-hero-search',

@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -8,7 +10,7 @@ export class DjangoClientService {
   gametableUrl = 'https://maulbot.com/api/getGameTable';
 
   public getGameTable() {
-    return this.http.get(this.gametableUrl)
-      .map(response => response);
+    return this.http.get(this.gametableUrl).pipe(
+      map(response => response));
   }
 }
