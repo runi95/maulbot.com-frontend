@@ -7,11 +7,15 @@ import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {SuggestionsComponent} from './suggestions/suggestions.component';
 import {BlogpostComponent} from './blogpost/blogpost.component';
 import {BlogpostsComponent} from './blogposts/blogposts.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'heroes', component: HeroesComponent},
   {path: '', component: DashboardComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'detail/:id', component: HeroDetailComponent},
   {path: 'suggestions', component: SuggestionsComponent},
   {path: 'blogpost', component: BlogpostComponent},

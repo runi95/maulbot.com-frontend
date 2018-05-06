@@ -27,6 +27,8 @@ import {DjangoClientService} from './django-client/django-client.service';
 import {SuggestionsService} from './suggestions-service/suggestions.service';
 import { BlogpostComponent } from './blogpost/blogpost.component';
 import { BlogpostsComponent } from './blogposts/blogposts.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -56,6 +58,8 @@ import { BlogpostsComponent } from './blogposts/blogposts.component';
     TimeAgoPipe,
     BlogpostComponent,
     BlogpostsComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   bootstrap: [AppComponent]
 })
