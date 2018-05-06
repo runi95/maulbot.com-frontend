@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Suggestion} from '../suggestion';
+import {Suggestion} from '../suggestions-service/suggestion';
 import {SuggestionsService} from '../suggestions-service/suggestions.service';
 
 @Component({

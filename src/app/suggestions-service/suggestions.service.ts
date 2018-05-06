@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Suggestion} from '../suggestion';
+import {Suggestion} from './suggestion';
 
 @Injectable()
 export class SuggestionsService {
