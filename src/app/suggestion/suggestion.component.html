@@ -6,7 +6,45 @@
         <p class="lead text-muted">Your suggestions help us greatly with all kinds of development.</p>
       </div>
     </section>
+
     <!-- TODO: Check whether user is authenticated or not! -->
+
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">{{selectedSuggestion.title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="lead">{{selectedSuggestion.submittedby}}</p>
+        <form (ngSubmit)="onSubmit()" #status="ngForm">
+          <select class="form-check-inline">
+            <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
+          </select>
+        </form>
+        <hr>
+        <p>Posted on {{selectedSuggestion.unixTime * 1000 | date:'medium'}}</p>
+        <hr>
+        <p>{{selectedSuggestion.text}}</p>
+        <hr>
+        <div class="card my-4">
+          <h5 class="card-header">Leave a Comment:</h5>
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()" #comment="ngForm">
+              <div class="form-group">
+                <textarea class="form-control" name="text" placeholder="Input your comment here" rows="3" cols="40" required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      </div>
+    </ng-template>
+
     <div class="row">
       <div class="col-lg-8">
 
@@ -48,6 +86,9 @@
             <i class="far fa-bell"></i> Your Suggestions
           </div>
           <div class="list-group list-group-flush small">
+            <!-- Modal -->
+
+            <!-- ModalEnd -->
             <!-- TODO: Add currently logged in user's suggestions here! -->
           </div>
         </div>
@@ -58,7 +99,8 @@
             <i class="far fa-bell"></i> Accepted Suggestions
           </div>
           <div class="list-group list-group-flush small">
-            <div *ngFor="let suggestion of suggestions" class="list-group-item list-group-item-action">
+            <div *ngFor="let suggestion of suggestions" class="list-group-item list-group-item-action" style="cursor: pointer;"
+                 (click)="open(suggestion, content)">
               <div class="media">
               <span class="d-flex mr-3 rounded-circle  text-center" style="text-align: center;width: 45px;"
                     [style.color]="getSuggestionColor(suggestion.status)">

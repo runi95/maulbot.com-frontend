@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Suggestion} from '../suggestions-service/suggestion';
 import {SuggestionsService} from '../suggestions-service/suggestions.service';
+import {ModalDismissReasons, NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {getOverloadKey} from 'tslint/lib/rules/adjacentOverloadSignaturesRule';
 
 @Component({
   selector: 'app-suggestion',
@@ -9,11 +11,15 @@ import {SuggestionsService} from '../suggestions-service/suggestions.service';
 })
 export class SuggestionComponent implements OnInit {
 
-  typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)']
+  selectedSuggestion: Suggestion;
+  typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)'];
+  statusOptions: string[] = ['Unapproved', 'Approved', 'Finished', 'Rejected', 'Needs Discussion'];
   userSuggestions: Suggestion[];
   suggestions: Suggestion[];
 
-  constructor(private suggestionsService: SuggestionsService) { }
+  closeResult: string;
+
+  constructor(private suggestionsService: SuggestionsService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.showSuggestion();
@@ -49,6 +55,25 @@ export class SuggestionComponent implements OnInit {
 
   onSubmit(): void {
 
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  open(suggestion: Suggestion, content) {
+    this.selectedSuggestion = suggestion;
+    this.modalService.open(content, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 }
