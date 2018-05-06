@@ -39,7 +39,7 @@ export class SuggestionComponent implements OnInit {
     } else if (type === 'BUG') {
       return 'fas fa-bug';
     } else if (type === 'IM') {
-      return 'fas fa-code-branch';
+      return 'far fa-code-branch';
     } else if (type === 'OTR') {
       return 'fas fa-info';
     } else {
