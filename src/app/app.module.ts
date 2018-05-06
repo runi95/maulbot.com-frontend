@@ -29,6 +29,7 @@ import { BlogpostComponent } from './blogpost/blogpost.component';
 import { BlogpostsComponent } from './blogposts/blogposts.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import {BlogpostsService} from './blogposts-service/blogposts.service';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { LoginComponent } from './login/login.component';
     SuggestionsService,
     InMemoryDataService,
     DjangoClientService,
+    BlogpostsService,
   ],
   declarations: [
     AppComponent,
