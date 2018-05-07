@@ -12,7 +12,7 @@ export class BlogpostsComponent implements OnInit {
 
   posts: Blogpost[];
 
-  pageSize = 5;
+  pageSize = 7;
   collectionSize: number;
   page = 1;
 

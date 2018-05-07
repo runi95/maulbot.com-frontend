@@ -18,7 +18,7 @@
           </a>
           <p class="post-meta"><span style="color: #868e96">Posted by </span>
             <a href="#" style="color: #212529">{{ post.username }}</a>
-            <span style="color: #868e96"> on {{ post.published_date }}</span></p>
+            <span style="color: #868e96"> on {{ post.published_date | date:'medium' }}</span></p>
           <hr>
         </div>
       </div>
