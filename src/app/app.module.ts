@@ -17,20 +17,20 @@ import {HeroSearchComponent} from './hero-search/hero-search.component';
 import {MessagesComponent} from './messages/messages.component';
 import {HeroService} from './hero-service/hero.service';
 import {MessageService} from './message-service/message.service';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SuggestionsComponent } from './suggestions/suggestions.component';
+import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {SuggestionsComponent} from './suggestions/suggestions.component';
 
 
-
-import { GameTableComponent } from './game-table/game-table.component';
+import {GameTableComponent} from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
 import {SuggestionsService} from './suggestions-service/suggestions.service';
-import { BlogpostComponent } from './blogpost/blogpost.component';
-import { BlogpostsComponent } from './blogposts/blogposts.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import {BlogpostComponent} from './blogpost/blogpost.component';
+import {BlogpostsComponent} from './blogposts/blogposts.component';
+import {RegisterComponent} from './register/register.component';
+import {LoginComponent} from './login/login.component';
 import {BlogpostsService} from './blogposts-service/blogposts.service';
 import {PaginationserviceService} from './paginationservice/paginationservice.service';
+import {AuthService} from './auth/auth.service';
 
 @NgModule({
   imports: [
@@ -48,6 +48,7 @@ import {PaginationserviceService} from './paginationservice/paginationservice.se
     DjangoClientService,
     BlogpostsService,
     PaginationserviceService,
+    AuthService,
   ],
   declarations: [
     AppComponent,

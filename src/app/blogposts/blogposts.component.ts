@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Blogpost} from '../blogposts-service/blogpost';
 import {BlogpostsService} from '../blogposts-service/blogposts.service';
 import {PaginationserviceService} from '../paginationservice/paginationservice.service';
@@ -20,11 +20,12 @@ export class BlogpostsComponent implements OnInit {
     this.getBlogposts();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   shouldShow(index: number): boolean {
     const indexPage: number = Math.floor(index / this.pageSize) + 1;
-    if(this.page === indexPage) {
+    if (this.page === indexPage) {
       return true;
     }
 
