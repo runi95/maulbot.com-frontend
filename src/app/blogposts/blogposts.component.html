@@ -1,14 +1,14 @@
 <div class="container blog">
 
   <!-- TODO: Check if user is admin! -->
-  <div class="row justify-content-center">
-    <div class="col-4 align-self-end">
-      <a href="/blog/new" class="btn btn-danger btn-block ">New Post</a>
+  <div style="margin-bottom: 20px;">
+    <div style="float: right;">
+      <a href="/blog/new" class="btn btn-primary btn-block">New Post</a>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-10 col-md-12 mx-auto">
+    <div class="col-lg-10 col-md-12 mx-auto"> <!--  style="text-align: center;" -->
       <div *ngFor="let post of posts; let i = index" class="post-preview">
         <div *ngIf="shouldShow(i)">
           <a href="#" style="color: #212529; font-size: 36px; font-weight: 800;">
@@ -23,8 +23,10 @@
         </div>
       </div>
 
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [rotate]="true" [pageSize]="pageSize"
-                      [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      <div style="text-align: center;">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [rotate]="true" [pageSize]="pageSize"
+                        [ellipses]="false" [boundaryLinks]="true" style="display: inline-block;"></ngb-pagination>
+      </div>
     </div>
   </div>
 </div>
