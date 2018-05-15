@@ -10,28 +10,25 @@
           <th>Lobbyname</th>
           <th>Players</th>
           <th>Botname</th>
-          <th>Europe</th>
-          <th>USWest</th>
-          <th>USEast</th>
+          <th>Online</th>
           <th>Uptime</th>
         </tr>
         </thead>
 
         <tbody id="gametable">
 
-
-        <tr *ngFor="let game of gamelist">
-          <td>{{game.lobbyname}}</td>
+        <ng-container *ngFor="let game of gamelist">
+        <tr *ngIf="game.getActive">
+          <td>{{game.gamename}}</td>
           <td>{{game.players}}/13</td>
           <td>{{game.botname}}</td>
           <td><i style="color: green" class="fas fa-power-off"></i>
           </td>
-          <td><i style="color: green" class="fas fa-power-off"></i>
-          </td>
-          <td><i style="color: green" class="fas fa-power-off"></i>
-          </td>
-          <td>{{game.uptime}}</td>
+          <td>{{game.getReadableTime}}</td>
         </tr>
+        </ng-container>
+
+
 
 
         </tbody>

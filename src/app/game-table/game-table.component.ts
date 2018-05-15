@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DjangoClientService} from '../django-client/django-client.service';
 import {getOrSetAsInMap} from '@angular/animations/browser/src/render/shared';
+import {GameTable} from '../django-client/Classes';
+import {Blogpost} from '../blogposts-service/blogpost';
 
 @Component({
   selector: 'app-game-table',
@@ -9,8 +11,8 @@ import {getOrSetAsInMap} from '@angular/animations/browser/src/render/shared';
 })
 
 export class GameTableComponent implements OnInit {
-  gamelist = [];
-
+  gamelist: GameTable[];
+  interval: any;
 
   constructor(private djangoClientService: DjangoClientService) {
   }
@@ -47,8 +49,17 @@ export class GameTableComponent implements OnInit {
       );
   }
 
+
   ngOnInit() {
-    this.showConfig();
+    this.getGameTable();
+    this.interval = setInterval(() => {
+      this.getGameTable();
+    }, 15000);
+  }
+  getGameTable() {
+    return this.djangoClientService.getGameTable().subscribe((data: GameTable[]) => {
+      this.gamelist = data;
+    });
   }
 
 }

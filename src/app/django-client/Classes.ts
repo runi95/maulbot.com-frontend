@@ -1,4 +1,9 @@
-export class Table {
+export class GameChart {
+  days: any;
+  counts: any;
+}
+
+export class GameTable {
   players: number;
   botname: string;
   gamename: string;

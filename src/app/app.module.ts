@@ -8,6 +8,7 @@ import {InMemoryDataService} from './inMemoryData-service/in-memory-data.service
 import {AppRoutingModule} from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { ChartsModule } from 'ng2-charts';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -31,6 +32,7 @@ import {LoginComponent} from './login/login.component';
 import {BlogpostsService} from './blogposts-service/blogposts.service';
 import {PaginationserviceService} from './paginationservice/paginationservice.service';
 import {AuthService} from './auth/auth.service';
+import { GameChartComponent } from './game-chart/game-chart.component';
 
 @NgModule({
   imports: [
@@ -39,6 +41,7 @@ import {AuthService} from './auth/auth.service';
     AppRoutingModule,
     HttpClientModule,
     NgbModule.forRoot(),
+    ChartsModule,
   ],
   providers: [
     HeroService,
@@ -65,6 +68,7 @@ import {AuthService} from './auth/auth.service';
     BlogpostsComponent,
     RegisterComponent,
     LoginComponent,
+    GameChartComponent,
   ],
   bootstrap: [AppComponent]
 })
