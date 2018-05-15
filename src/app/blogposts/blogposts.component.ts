@@ -16,11 +16,10 @@ export class BlogpostsComponent implements OnInit {
   collectionSize: number;
   page = 1;
 
-  constructor(private blogpostService: BlogpostsService, private pagerService: PaginationserviceService) {
-    this.getBlogposts();
-  }
+  constructor(private blogpostService: BlogpostsService, private pagerService: PaginationserviceService) {}
 
   ngOnInit() {
+    this.getBlogposts();
   }
 
   shouldShow(index: number): boolean {
