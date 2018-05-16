@@ -25,7 +25,7 @@ import {SuggestionsComponent} from './suggestions/suggestions.component';
 import {GameTableComponent} from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
 import {SuggestionsService} from './suggestions-service/suggestions.service';
-import {BlogpostComponent} from './blogpost/blogpost.component';
+import {BlogpostComponent} from './blogpostDetail/blogpost.component';
 import {BlogpostsComponent} from './blogposts/blogposts.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
@@ -33,6 +33,7 @@ import {BlogpostsService} from './blogposts-service/blogposts.service';
 import {PaginationserviceService} from './paginationservice/paginationservice.service';
 import {AuthService} from './auth/auth.service';
 import { GameChartComponent } from './game-chart/game-chart.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   imports: [
@@ -69,6 +70,7 @@ import { GameChartComponent } from './game-chart/game-chart.component';
     RegisterComponent,
     LoginComponent,
     GameChartComponent,
+    ProfilePageComponent,
   ],
   bootstrap: [AppComponent]
 })

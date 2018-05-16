@@ -68,7 +68,7 @@ export class GameChartComponent implements OnInit {
       this.lineChartLabels = data['days'];
       const _lineChartData: Array<any> = new Array(1);
       for (let i = 0; i < _lineChartData.length; i++) {
-        _lineChartData[i] = {data: new Array(data['counts'].length), label: this.lineChartLabels[i]};
+        _lineChartData[i] = {data: new Array(data['counts'].length), label: 'Games'};
         for (let j = 0; j < data['counts'].length; j++) {
           _lineChartData[i].data[j] = data['counts'][j];
         }

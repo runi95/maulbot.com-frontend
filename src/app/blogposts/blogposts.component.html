@@ -11,7 +11,7 @@
     <div class="col-lg-10 col-md-12 mx-auto"> <!--  style="text-align: center;" -->
       <div *ngFor="let post of posts; let i = index" class="post-preview">
         <div *ngIf="shouldShow(i)">
-          <a href="#" style="color: #212529; font-size: 36px; font-weight: 800;">
+          <a [routerLink]="['/blog', post.pk]" style="color: #212529; font-size: 36px; font-weight: 800;">
             <h2 class="post-title">
               {{ post.title }}
             </h2>

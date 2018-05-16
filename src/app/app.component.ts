@@ -1,4 +1,5 @@
-import {Component, Input, NgModule} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +7,14 @@ import {Component, Input, NgModule} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Tour of Heroes';
   @Input()
   public alerts: Array<IAlert> = [];
 
   private backup: Array<IAlert>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.alerts.push({
       id: 1,
       type: 'success',
@@ -48,6 +49,15 @@ export class AppComponent {
       message: 'This is a dark alert',
     });
     this.backup = this.alerts.map((alert: IAlert) => Object.assign({}, alert));
+  }
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 
   public closeAlert(alert: IAlert) {

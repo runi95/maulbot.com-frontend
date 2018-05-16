@@ -5,7 +5,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {SuggestionsComponent} from './suggestions/suggestions.component';
-import {BlogpostComponent} from './blogpost/blogpost.component';
+import {BlogpostComponent} from './blogpostDetail/blogpost.component';
 import {BlogpostsComponent} from './blogposts/blogposts.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
@@ -17,8 +17,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'detail/:id', component: HeroDetailComponent},
   {path: 'suggestions', component: SuggestionsComponent},
-  {path: 'blogpost', component: BlogpostComponent},
-  {path: 'blogposts', component: BlogpostsComponent}
+  {path: 'blog/:id', component: BlogpostComponent},
+  {path: 'blog', component: BlogpostsComponent}
 ];
 
 @NgModule({
