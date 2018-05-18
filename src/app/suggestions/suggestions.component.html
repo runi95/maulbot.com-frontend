@@ -16,36 +16,80 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="selectedSuggestion.text; else loadingSuggestion;">
         <p class="lead">{{selectedSuggestion.submittedby}} - {{statusOptions[selectedSuggestion.status]}} </p>
-        <form (ngSubmit)="onSubmit()" #status="ngForm">
+        <form (ngSubmit)="onSubmit()" #status="ngForm" *ngIf="_authService.isAdmin()">
           <select class="form-check-inline">
-            <option *ngFor="let status of statusOptions; let i = index" [value]="status" [attr.selected]="selectedSuggestion.status==i ? true : null">{{status}}</option>
+            <option *ngFor="let status of statusOptions; let i = index" [value]="status"
+                    [attr.selected]="selectedSuggestion.status==i ? true : null">{{status}}
+            </option>
           </select>
         </form>
         <hr>
-        <p>Posted on {{selectedSuggestion.unixTime * 1000 | date:'medium'}}</p>
+        <p>Posted on {{selectedSuggestion.pub_date | date:'medium'}}</p>
         <hr>
         <p ng-bind="textFromJSON" style="white-space:pre-wrap">{{selectedSuggestion.text}}</p>
         <hr>
-        <div class="card my-4">
+        <div class="card my-4" *ngIf="_authService.loggedIn(); else logInToComment">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <form (ngSubmit)="onSubmit()" #comment="ngForm">
               <div class="form-group">
-                <textarea class="form-control" name="text" placeholder="Input your comment here" rows="3" cols="40" required></textarea>
+                <textarea class="form-control" name="text" placeholder="Input your comment here" rows="3" cols="40"
+                          required></textarea>
               </div>
               <button class="btn btn-primary" type="submit">Submit</button>
             </form>
           </div>
         </div>
+        <ng-template #logInToComment>
+          <app-log-in-to-comment></app-log-in-to-comment>
+        </ng-template>
+      </div>
+      <ng-template #loadingSuggestion>
+        <div class="modal-body">
+          <div class="col-12 justify-content-center"><img class="rounded mx-auto d-block"
+                                                          src="assets/img/loading.gif"></div>
+        </div>
+      </ng-template>
+      <hr>
+      <div *ngIf="selectedSuggestion.comments">
+        <div class="row justify-content-center">
+        <div class="media mb-4 col-md-11" *ngFor="let comment of selectedSuggestion.comments; let i = index">
+                    <span class="d-flex mr-3 rounded-circle  text-center"
+                          style="text-align: center;width: 50px;">
+                                                <i [ngClass]="comment.superuser ? 'fas fa-key':'fas fa-user'"
+                                                   style="display:inline-block;font-size: 50px;width: 50px;height: 50px;text-align: center;vertical-align: bottom;"
+                                                   aria-hidden="true"></i>
+                                            </span>
+          <div class="media-body">
+            <h5 class="mt-0">{{ comment.author }} </h5>
+            <p ng-bind="textFromJSON" style="white-space:pre-wrap">{{ comment.text }}</p>
+            <div class="text-muted smaller">{{ comment.created_date| date:'medium' }}</div>
+            <div class="media mb-4" style="padding-top: 1rem" *ngFor="let reply of comment.replys; let j = index">
+                    <span class="d-flex mr-3 rounded-circle  text-center"
+                          style="text-align: center;width: 50px;">
+                                                <i [ngClass]="reply.superuser ? 'fas fa-key':'fas fa-user'"
+                                                   style="display:inline-block;font-size: 50px;width: 50px;height: 50px;text-align: center;vertical-align: bottom;"
+                                                   aria-hidden="true"></i>
+                                            </span>
+              <div class="media-body">
+                <h5 class="mt-0">{{ reply.author }}</h5>
+                <p ng-bind="textFromJSON" style="white-space:pre-wrap">{{ reply.text }}</p>
+                <div class="text-muted smaller">{{ reply.created_date | date:'medium' }}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="d('Close click')">Close</button>
       </div>
     </ng-template>
-
-    <div class="row">
+    <!-- TODO: Check whether user is authenticated or not! -->
+    <div class="row" *ngIf="_authService.loggedIn(); else notLoggedIn;">
       <div class="col-lg-8">
 
         <div class="card mx-auto mb-3">
@@ -93,13 +137,21 @@
           </div>
         </div>
       </div>
+    </div>
+    <ng-template #notLoggedIn>
+      <div class="alert alert-warning text-center" role="alert">
+        You need to be logged in to post/view your suggestions.
+      </div>
+    </ng-template>
+    <div class="row">
       <div class="col-lg-12">
         <div class="card mb-3">
           <div class="card-header">
             <i class="far fa-bell"></i> Accepted Suggestions
           </div>
-          <div class="list-group list-group-flush small">
-            <div *ngFor="let suggestion of suggestions" class="list-group-item list-group-item-action" style="cursor: pointer;"
+          <div class="list-group list-group-flush small" *ngIf="suggestions; else elseblock;">
+            <div *ngFor="let suggestion of suggestions" class="list-group-item list-group-item-action"
+                 style="cursor: pointer;"
                  (click)="open(suggestion, content)">
               <div class="media">
               <span class="d-flex mr-3 rounded-circle  text-center" style="text-align: center;width: 45px;"
@@ -113,15 +165,25 @@
                   <strong>{{ suggestion.title }}</strong>
                   <div class="text-muted smaller">Approved by
                     <b>{{ suggestion.approvedby }}</b>
-                    ({{ suggestion.unixTime*1000 | timeAgo }})
+                    ({{ suggestion.pub_date | timeAgo }})
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <ng-template #elseblock>
+            <div class="col-12 justify-content-center"><img class="rounded mx-auto d-block"
+                                                            src="assets/img/loading.gif"></div>
+          </ng-template>
         </div>
       </div>
     </div>
 
   </div>
 </div>
+
+
+
+
+
+

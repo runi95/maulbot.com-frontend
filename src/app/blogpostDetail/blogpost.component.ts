@@ -33,7 +33,6 @@ export class BlogpostComponent implements OnInit {
         this.post.filename = this.post.mapfile.substring(this.post.mapfile.lastIndexOf('/') + 1);
         this.hasfile = true;
       }
-      console.log(this.post);
     });
   }
 

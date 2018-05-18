@@ -1,7 +1,7 @@
-<div class="container blog">
+<div class="container blog" *ngIf="posts;else elseblock">
 
   <!-- TODO: Check if user is admin! -->
-  <div style="margin-bottom: 20px;">
+  <div style="margin-bottom: 20px;" *ngIf="_authService.isAdmin()">
     <div style="float: right;">
       <a href="/blog/new" class="btn btn-primary btn-block">New Post</a>
     </div>
@@ -29,4 +29,9 @@
       </div>
     </div>
   </div>
+
 </div>
+<ng-template #elseblock>
+  <div class="col-12 justify-content-center"><img class="rounded mx-auto d-block"
+                                                  src="assets/img/loading.gif"></div>
+</ng-template>

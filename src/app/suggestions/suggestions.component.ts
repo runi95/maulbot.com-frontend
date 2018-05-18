@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Suggestion} from '../suggestions-service/suggestion';
+import {Component, OnInit} from '@angular/core';
 import {SuggestionsService} from '../suggestions-service/suggestions.service';
 import {ModalDismissReasons, NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
-import {getOverloadKey} from 'tslint/lib/rules/adjacentOverloadSignaturesRule';
+import {AuthService} from '../auth/auth.service';
+import {Suggestion, SuggestionDetail} from '../django-client/Classes';
+import {DjangoClientService} from '../django-client/django-client.service';
 
 @Component({
   selector: 'app-suggestion',
@@ -11,7 +12,7 @@ import {getOverloadKey} from 'tslint/lib/rules/adjacentOverloadSignaturesRule';
 })
 export class SuggestionsComponent implements OnInit {
 
-  selectedSuggestion: Suggestion;
+  selectedSuggestion: any;
   typeOptions: string[] = ['Bug Report', 'Improvement', 'Unit Text Data', 'Other (Unspecified)'];
   statusOptions: string[] = ['Unapproved', 'Approved', 'Finished', 'Rejected', 'Needs Discussion'];
   userSuggestions: Suggestion[];
@@ -19,7 +20,10 @@ export class SuggestionsComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(private suggestionsService: SuggestionsService, private modalService: NgbModal) { }
+  constructor(private suggestionsService: SuggestionsService,
+              private modalService: NgbModal,
+              private _authService: AuthService,
+              private djangoClientService: DjangoClientService) { }
 
   ngOnInit() {
     this.showSuggestion();
@@ -30,7 +34,7 @@ export class SuggestionsComponent implements OnInit {
   }
 
   getSuggestionColor(status: number): string {
-    switch(status) {
+    switch (status) {
       case 0: {
         return 'black';
       }
@@ -74,16 +78,19 @@ export class SuggestionsComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   open(suggestion: Suggestion, content) {
-    this.selectedSuggestion = suggestion;
+    this.selectedSuggestion = Suggestion;
     this.modalService.open(content, {size: 'vl', backdropClass: 'SuggestionModal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+    this.djangoClientService.getSuggestionDetail(suggestion.pk).subscribe((data: SuggestionDetail) => {
+      this.selectedSuggestion = data;
     });
   }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DjangoClientService} from '../django-client/django-client.service';
 import {getOrSetAsInMap} from '@angular/animations/browser/src/render/shared';
 import {GameTable} from '../django-client/Classes';
@@ -10,7 +10,7 @@ import {Blogpost} from '../blogposts-service/blogpost';
   styleUrls: ['./game-table.component.css']
 })
 
-export class GameTableComponent implements OnInit {
+export class GameTableComponent implements OnInit, OnDestroy {
   gamelist: GameTable[];
   interval: any;
 
@@ -60,6 +60,11 @@ export class GameTableComponent implements OnInit {
     return this.djangoClientService.getGameTable().subscribe((data: GameTable[]) => {
       this.gamelist = data;
     });
+  }
+  ngOnDestroy(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
 }

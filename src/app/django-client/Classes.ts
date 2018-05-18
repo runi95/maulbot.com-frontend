@@ -38,3 +38,29 @@ export class BlogDetail {
   filename: string;
   comments: Comment[];
 }
+
+export class Suggestion {
+  constructor(
+    public pk: number,
+    public title: string,
+    public type: string,
+    public pub_date: string,
+    public status: number,
+    public submittedby: string,
+    public approvedby: string,
+  ) { }
+}
+
+export class SuggestionDetail {
+  constructor(
+    public pk: number,
+    public title: string,
+    public text: string,
+    public type: string,
+    public pub_date: string,
+    public status: number,
+    public submittedby: string,
+    public approvedby: string,
+    public comments: Comment[],
+  ) { }
+}

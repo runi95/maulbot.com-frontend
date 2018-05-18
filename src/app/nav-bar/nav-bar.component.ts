@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit {
   public isCollapsed = false;
   isNavToggle = true;
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,6 @@ export class NavBarComponent implements OnInit {
 
   sideNavToggleClick() {
     this.isNavToggle = !this.isNavToggle;
-    console.log("clickec");
   }
 
   //$("#sidenavToggler").click(function(e) {

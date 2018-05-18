@@ -1,22 +1,17 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import {InMemoryDataService} from './inMemoryData-service/in-memory-data.service';
 
 import {AppRoutingModule} from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TimeAgoPipe} from 'time-ago-pipe';
-import { ChartsModule } from 'ng2-charts';
+import {ChartsModule} from 'ng2-charts';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {HeroDetailComponent} from './hero-detail/hero-detail.component';
-import {HeroesComponent} from './heroes/heroes.component';
-import {HeroSearchComponent} from './hero-search/hero-search.component';
 import {MessagesComponent} from './messages/messages.component';
-import {HeroService} from './hero-service/hero.service';
 import {MessageService} from './message-service/message.service';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {SuggestionsComponent} from './suggestions/suggestions.component';
@@ -32,8 +27,12 @@ import {LoginComponent} from './login/login.component';
 import {BlogpostsService} from './blogposts-service/blogposts.service';
 import {PaginationserviceService} from './paginationservice/paginationservice.service';
 import {AuthService} from './auth/auth.service';
-import { GameChartComponent } from './game-chart/game-chart.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
+import {GameChartComponent} from './game-chart/game-chart.component';
+import {ProfilePageComponent} from './profile-page/profile-page.component';
+import {AuthGuard} from './auth/auth.guard';
+import { TokenInterceptorService} from './auth/token-interceptor.service';
+import { LogInToCommentComponent } from './log-in-to-comment/log-in-to-comment.component';
+import { SuggestionFormComponent } from './suggestion-form/suggestion-form.component';
 
 @NgModule({
   imports: [
@@ -45,22 +44,23 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     ChartsModule,
   ],
   providers: [
-    HeroService,
     MessageService,
     SuggestionsService,
-    InMemoryDataService,
     DjangoClientService,
     BlogpostsService,
     PaginationserviceService,
     AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent,
     NavBarComponent,
     SuggestionsComponent,
     GameTableComponent,
@@ -71,6 +71,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     LoginComponent,
     GameChartComponent,
     ProfilePageComponent,
+    LogInToCommentComponent,
+    SuggestionFormComponent,
   ],
   bootstrap: [AppComponent]
 })

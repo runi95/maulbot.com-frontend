@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DjangoClientService} from '../django-client/django-client.service';
 import {GameChart} from '../django-client/Classes';
 
@@ -7,7 +7,7 @@ import {GameChart} from '../django-client/Classes';
   templateUrl: './game-chart.component.html',
   styleUrls: ['./game-chart.component.css']
 })
-export class GameChartComponent implements OnInit {
+export class GameChartComponent implements OnInit, OnDestroy {
   interval: any;
 
   // lineChart
@@ -65,21 +65,26 @@ export class GameChartComponent implements OnInit {
 
   getGameChart() {
     return this.djangoClientService.getGameChart().subscribe((data: GameChart[]) => {
-      this.lineChartLabels = data['days'];
+      this.lineChartLabels = data['days'].splice(-1 * 14);
       const _lineChartData: Array<any> = new Array(1);
+      const counts = data['counts'].splice(-1 * 14);
       for (let i = 0; i < _lineChartData.length; i++) {
-        _lineChartData[i] = {data: new Array(data['counts'].length), label: 'Games'};
-        for (let j = 0; j < data['counts'].length; j++) {
-          _lineChartData[i].data[j] = data['counts'][j];
+        _lineChartData[i] = {data: new Array(counts.length), label: 'Games'};
+        for (let j = 0; j < counts.length; j++) {
+          _lineChartData[i].data[j] = counts[j];
         }
       }
+      this.lineChartLabels[this.lineChartLabels.length - 1] = 'Today';
       this.lineChartData = _lineChartData;
       this.updated = true;
-      console.log(data['days']);
-      console.log(this.lineChartData);
-      console.log(this.lineChartLabels);
 
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
 }

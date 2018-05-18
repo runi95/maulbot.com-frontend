@@ -5,7 +5,7 @@ import {Blogpost} from './blogpost';
 @Injectable()
 export class BlogpostsService {
 
-  apiUrl = 'https://maulbot.com/api/blogPosts';
+  apiUrl = 'http://192.168.2.108:13800/api/blogPosts';
 
   constructor(private http: HttpClient) { }
 

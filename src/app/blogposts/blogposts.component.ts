@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Blogpost} from '../blogposts-service/blogpost';
 import {BlogpostsService} from '../blogposts-service/blogposts.service';
 import {PaginationserviceService} from '../paginationservice/paginationservice.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-blogposts',
@@ -16,7 +17,10 @@ export class BlogpostsComponent implements OnInit {
   collectionSize: number;
   page = 1;
 
-  constructor(private blogpostService: BlogpostsService, private pagerService: PaginationserviceService) {}
+  constructor(private blogpostService: BlogpostsService,
+              private pagerService: PaginationserviceService,
+              private _authService: AuthService) {
+  }
 
   ngOnInit() {
     this.getBlogposts();

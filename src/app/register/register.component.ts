@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    console.log(this.registerUserData);
     if (this.registerUserData.password !== this.registerUserData.password1) {
       this.formError = 'The passwords do not match.';
     } else {
