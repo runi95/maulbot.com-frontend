@@ -9,10 +9,10 @@ import * as moment from 'moment';
 })
 export class AuthService {
 
-  private _registerUrl = 'http://192.168.2.108:13800/api/user/register';
-  private _loginUrl = 'http://192.168.2.108:13800/api/token/';
-  private _refreshUrl = 'http://192.168.2.108:13800/api/token/refresh/';
-  private _verifyUrl = 'http://192.168.2.108:13800/api/token/verify/';
+  private _registerUrl = '/api/user/register';
+  private _loginUrl = '/api/token/';
+  private _refreshUrl = '/api/token/refresh/';
+  private _verifyUrl = '/api/token/verify/';
 
 
   constructor(private http: HttpClient, private router: Router) {

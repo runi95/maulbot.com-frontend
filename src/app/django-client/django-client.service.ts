@@ -6,12 +6,12 @@ import {BlogDetail, GameChart, GameTable, Suggestion, SuggestionDetail} from './
 @Injectable()
 export class DjangoClientService {
 
-  tableApiURL = 'http://192.168.2.108:13800/api/getGameTable?format=json';
-  chartApiURL = 'http://192.168.2.108:13800/api/getGameChart?format=json';
-  blogDetailUrl = 'http://192.168.2.108:13800/api/blogPosts/';
-  suggestionDetailUrl = 'http://192.168.2.108:13800/api/suggestions/';
-  mySuggestionsUrl = 'http://192.168.2.108:13800/api/mySuggestions';
-  suggestionListUrl = 'http://192.168.2.108:13800/api/suggestions';
+  tableApiURL = '/api/getGameTable?format=json';
+  chartApiURL = '/api/getGameChart?format=json';
+  blogDetailUrl = '/api/blogPosts/';
+  suggestionDetailUrl = '/api/suggestions/';
+  mySuggestionsUrl = '/api/mySuggestions';
+  suggestionListUrl = '/api/suggestions';
 
 
   constructor(private http: HttpClient) {
