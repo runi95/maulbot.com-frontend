@@ -49,4 +49,8 @@ export class DjangoClientService {
     return this.http.post<any>(this.suggestionDetailUrl + pk + '/comment', comment);
   }
 
+  newBlogComment(comment, pk) {
+    return this.http.post<BlogDetail>(this.blogDetailUrl + pk + '/comment', comment);
+  }
+
 }

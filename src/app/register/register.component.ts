@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
+import {Comment, SignUpError} from '../django-client/Classes';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,6 +9,7 @@ import {AuthService} from '../auth/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  error: SignUpError;
 
 
   registerUserData = {
@@ -15,7 +18,7 @@ export class RegisterComponent implements OnInit {
   };
   formError: String;
 
-  constructor(private _auth: AuthService) {
+  constructor(private _auth: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,9 +30,13 @@ export class RegisterComponent implements OnInit {
     } else {
       this._auth.registerUser(this.registerUserData)
         .subscribe(
-          res => console.log(res),
-          err => console.log(err)
-        )
+          res => {
+            this.router.navigate(['/login']);
+          },
+          err => {
+            this.error = err.error;
+          }
+        );
     }
 
   }

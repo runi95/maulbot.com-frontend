@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import {BlogDetail, GameTable} from '../django-client/Classes';
+import {BlogDetail, GameTable, NewComment} from '../django-client/Classes';
 import {DjangoClientService} from '../django-client/django-client.service';
 import {Blogpost} from '../blogposts-service/blogpost';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-blogpost',
@@ -15,10 +16,15 @@ export class BlogpostComponent implements OnInit {
   post: BlogDetail;
   filename: string;
   hasfile = false;
+  formComment = new NewComment();
+  submitted = false;
 
 
   constructor(
-    private route: ActivatedRoute, private router: Router, private djangoClientService: DjangoClientService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private djangoClientService: DjangoClientService,
+    private _authService: AuthService) {
   }
 
   ngOnInit() {
@@ -33,6 +39,19 @@ export class BlogpostComponent implements OnInit {
         this.post.filename = this.post.mapfile.substring(this.post.mapfile.lastIndexOf('/') + 1);
         this.hasfile = true;
       }
+      this.submitted = false;
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+  }
+
+  newComment() {
+    console.log(this.formComment);
+    this.djangoClientService.newBlogComment(this.formComment, this.id).subscribe((data: any) => {
+      this.formComment = new NewComment();
+      this.getBlogDetail();
     });
   }
 

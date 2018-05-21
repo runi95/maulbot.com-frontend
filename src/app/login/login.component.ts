@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
+import {LoginError} from '../django-client/Classes';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginUserData = {};
+  error: LoginError;
 
   constructor(private _auth: AuthService, private router: Router) {
   }
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('refreshtokenExpire', decodedJwtData.exp);
         this.router.navigate(['/']);
       },
-      error1 => console.log(error1)
+      error1 => this.error = error1.error
     );
   }
 

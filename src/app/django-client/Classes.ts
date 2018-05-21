@@ -76,3 +76,18 @@ export class SuggestionForm {
 export class NewComment {
   text: string;
 }
+
+
+export class SignUpError {
+  email: Array;
+  username: Array;
+  password: Array;
+
+}
+export class LoginError {
+  email: Array;
+  username: Array;
+  password: Array;
+  non_field_errors: Array;
+
+}
