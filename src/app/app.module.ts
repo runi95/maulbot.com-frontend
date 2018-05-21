@@ -19,7 +19,6 @@ import {SuggestionsComponent} from './suggestions/suggestions.component';
 
 import {GameTableComponent} from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
-import {SuggestionsService} from './suggestions-service/suggestions.service';
 import {BlogpostComponent} from './blogpostDetail/blogpost.component';
 import {BlogpostsComponent} from './blogposts/blogposts.component';
 import {RegisterComponent} from './register/register.component';
@@ -30,9 +29,10 @@ import {AuthService} from './auth/auth.service';
 import {GameChartComponent} from './game-chart/game-chart.component';
 import {ProfilePageComponent} from './profile-page/profile-page.component';
 import {AuthGuard} from './auth/auth.guard';
-import { TokenInterceptorService} from './auth/token-interceptor.service';
-import { LogInToCommentComponent } from './log-in-to-comment/log-in-to-comment.component';
-import { SuggestionFormComponent } from './suggestion-form/suggestion-form.component';
+import {TokenInterceptorService} from './auth/token-interceptor.service';
+import {LogInToCommentComponent} from './log-in-to-comment/log-in-to-comment.component';
+import {SuggestionFormComponent} from './suggestion-form/suggestion-form.component';
+import { SuggestionCommentFormComponent } from './suggestion-comment-form/suggestion-comment-form.component';
 
 @NgModule({
   imports: [
@@ -45,7 +45,6 @@ import { SuggestionFormComponent } from './suggestion-form/suggestion-form.compo
   ],
   providers: [
     MessageService,
-    SuggestionsService,
     DjangoClientService,
     BlogpostsService,
     PaginationserviceService,
@@ -73,6 +72,7 @@ import { SuggestionFormComponent } from './suggestion-form/suggestion-form.compo
     ProfilePageComponent,
     LogInToCommentComponent,
     SuggestionFormComponent,
+    SuggestionCommentFormComponent,
   ],
   bootstrap: [AppComponent]
 })

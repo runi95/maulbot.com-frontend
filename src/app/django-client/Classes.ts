@@ -18,8 +18,8 @@ export class Comment {
   text: string;
   replys: CommentReply[];
   superuser: boolean;
-
 }
+
 export class CommentReply {
   author: string;
   created_date: string;
@@ -63,4 +63,16 @@ export class SuggestionDetail {
     public approvedby: string,
     public comments: Comment[],
   ) { }
+}
+
+export class SuggestionForm {
+  constructor(
+    public title: string,
+    public text: string,
+    public type: string,
+  ) { }
+}
+
+export class NewComment {
+  text: string;
 }

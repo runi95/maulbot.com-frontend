@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {SuggestionsService} from '../suggestions-service/suggestions.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../auth/auth.service';
 import {Suggestion, SuggestionDetail} from '../django-client/Classes';
@@ -17,20 +16,37 @@ export class SuggestionsComponent implements OnInit {
   statusOptions: string[] = ['Unapproved', 'Approved', 'Finished', 'Rejected', 'Needs Discussion'];
   userSuggestions: Suggestion[];
   suggestions: Suggestion[];
+  @ViewChild('theForm') theForm;
 
   closeResult: string;
 
-  constructor(private suggestionsService: SuggestionsService,
-              private modalService: NgbModal,
+  constructor(private modalService: NgbModal,
               private _authService: AuthService,
-              private djangoClientService: DjangoClientService) { }
+              private djangoClientService: DjangoClientService) {
+  }
 
   ngOnInit() {
     this.showSuggestion();
+    if (this._authService.loggedIn()) {
+      this.getMySuggestions();
+    }
   }
 
   showSuggestion() {
-    return this.suggestionsService.getUrl().subscribe((data: Suggestion[]) => this.suggestions = data);
+    return this.djangoClientService.listSuggestions().subscribe((data: Suggestion[]) => this.suggestions = data);
+  }
+
+  getMySuggestions() {
+    return this.djangoClientService.getMySuggestions().subscribe((data: Suggestion[]) => this.userSuggestions = data);
+  }
+
+  updateMySuggestions(event: boolean) {
+    this.getMySuggestions();
+  }
+  updateSelectedSuggestion(event: number) {
+    this.djangoClientService.getSuggestionDetail(event).subscribe((data: SuggestionDetail) => {
+      this.selectedSuggestion = data;
+    });
   }
 
   getSuggestionColor(status: number): string {
@@ -69,8 +85,8 @@ export class SuggestionsComponent implements OnInit {
   }
 
   onSubmit(): void {
-
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
