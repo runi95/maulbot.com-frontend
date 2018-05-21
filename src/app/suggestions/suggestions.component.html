@@ -44,7 +44,10 @@
         </div>
       </ng-template>
       <hr>
-      <div *ngIf="selectedSuggestion.comments">
+      <div class="row justify-content-center" [hidden]="!commentUpdating">
+        Loading Comments...
+      </div>
+      <div *ngIf="selectedSuggestion.comments" [hidden]="commentUpdating">
         <div class="row justify-content-center">
           <div class="media mb-4 col-md-11" *ngFor="let comment of selectedSuggestion.comments; let i = index">
                     <span class="d-flex mr-3 rounded-circle  text-center"

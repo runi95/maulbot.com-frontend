@@ -19,6 +19,7 @@ export class SuggestionsComponent implements OnInit {
   @ViewChild('theForm') theForm;
 
   closeResult: string;
+  commentUpdating = false;
 
   constructor(private modalService: NgbModal,
               private _authService: AuthService,
@@ -43,9 +44,12 @@ export class SuggestionsComponent implements OnInit {
   updateMySuggestions(event: boolean) {
     this.getMySuggestions();
   }
+
   updateSelectedSuggestion(event: number) {
+    this.commentUpdating = true;
     this.djangoClientService.getSuggestionDetail(event).subscribe((data: SuggestionDetail) => {
       this.selectedSuggestion = data;
+      this.commentUpdating = false;
     });
   }
 

@@ -10,6 +10,8 @@ import {NewComment} from '../django-client/Classes';
 export class SuggestionCommentFormComponent {
 
   @Input() pk: number;
+  @Input() updating: boolean;
+
 
   formComment = new NewComment();
 
