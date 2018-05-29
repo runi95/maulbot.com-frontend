@@ -10,7 +10,10 @@ import {LoginError} from '../django-client/Classes';
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData = {};
+  loginUserData = {
+    'username': '',
+    'password': '',
+  };
   error: LoginError;
 
   constructor(private _auth: AuthService, private router: Router) {

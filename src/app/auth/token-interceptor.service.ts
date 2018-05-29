@@ -13,11 +13,12 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(req, next) {
     let authService = this.injector.get(AuthService);
-    let tokenizedReq = req.clone();
+    let tokenizedReq = req.clone({
+    });
     if (authService.loggedIn()) {
       tokenizedReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authService.getToken()}`
+          Authorization: `Bearer ${authService.getToken()}`,
         }
       });
     }
@@ -26,7 +27,8 @@ export class TokenInterceptorService implements HttpInterceptor {
       },
       (error: any) => {
         if (error instanceof HttpErrorResponse) {
-          if (error.status === 401) {
+          if (error.status === 401 && !authService.verifiying) {
+            console.log('got error');
             authService.verifyToken();
           }
         }

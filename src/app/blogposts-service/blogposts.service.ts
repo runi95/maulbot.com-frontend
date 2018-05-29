@@ -4,8 +4,9 @@ import {Blogpost} from './blogpost';
 
 @Injectable()
 export class BlogpostsService {
+  suffix = '';
 
-  apiUrl = '/api/blogPosts';
+  apiUrl = this.suffix + '/api/blogPosts';
 
   constructor(private http: HttpClient) { }
 

@@ -3,6 +3,7 @@ import {DjangoClientService} from '../django-client/django-client.service';
 import {getOrSetAsInMap} from '@angular/animations/browser/src/render/shared';
 import {GameTable} from '../django-client/Classes';
 import {Blogpost} from '../blogposts-service/blogpost';
+import {st} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-game-table',
@@ -54,13 +55,33 @@ export class GameTableComponent implements OnInit, OnDestroy {
     this.getGameTable();
     this.interval = setInterval(() => {
       this.getGameTable();
-    }, 15000);
+    }, 2000);
   }
+
   getGameTable() {
     return this.djangoClientService.getGameTable().subscribe((data: GameTable[]) => {
       this.gamelist = data;
     });
   }
+
+  cleanString(string) {
+    return string.replace(/[^0-9a-zA-Z \]\[#]/g, '');
+  }
+
+  getMaximumPlayer(string) {
+      if (string === 'MaulBot') {
+        return '13';
+      } else if (string === 'MaulBot.1') {
+        return '9';
+      } else if (string === 'IM') {
+        return 'far fa-code-branch';
+      } else if (string === 'OTR') {
+        return 'fas fa-info';
+      } else {
+        return '999';
+      }
+    }
+
   ngOnDestroy(): void {
     if (this.interval) {
       clearInterval(this.interval);

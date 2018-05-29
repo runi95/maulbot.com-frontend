@@ -8,11 +8,13 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class AuthService {
+  suffix = 'http://192.168.2.108:13800';
 
-  private _registerUrl = '/api/user/register';
-  private _loginUrl = '/api/token/';
-  private _refreshUrl = '/api/token/refresh/';
-  private _verifyUrl = '/api/token/verify/';
+  private _registerUrl = this.suffix + '/api/user/register';
+  private _loginUrl = this.suffix + '/api/token/';
+  private _refreshUrl = this.suffix + '/api/token/refresh/';
+  private _verifyUrl = this.suffix + '/api/token/verify/';
+  public verifiying = false;
 
 
   constructor(private http: HttpClient, private router: Router) {
@@ -45,15 +47,19 @@ export class AuthService {
   }
 
   verifyToken() {
+    this.verifiying = true;
     const payload = {'token': this.getToken()};
     this.verifyTokenCall(payload).subscribe(
       res => {
         if (!res.detail) {
+          window.location.reload();
         } else {
           this.refreshToken();
         }
       },
-      error1 => console.log(error1)
+      error1 => {
+        this.refreshToken();
+      }
     );
   }
 
@@ -75,11 +81,19 @@ export class AuthService {
           localStorage.setItem('tokenExpire', decodedJwtData.exp);
           localStorage.setItem('username', decodedJwtData.name);
           localStorage.setItem('staff', decodedJwtData.staff);
+          this.verifiying = false;
+          window.location.reload();
+
         } else {
           this.logoutUser();
+          this.verifiying = false;
+
         }
       },
-      error1 => console.log(error1)
+      error1 => {
+        this.logoutUser();
+        this.verifiying = false;
+      }
     );
   }
 
@@ -92,6 +106,7 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
   getRefreshToken() {
     return localStorage.getItem('refreshtoken');
   }

@@ -48,7 +48,7 @@ export class BlogpostComponent implements OnInit {
   }
 
   newComment() {
-    console.log(this.formComment);
+    //console.log(this.formComment);
     this.djangoClientService.newBlogComment(this.formComment, this.id).subscribe((data: any) => {
       this.formComment = new NewComment();
       this.getBlogDetail();

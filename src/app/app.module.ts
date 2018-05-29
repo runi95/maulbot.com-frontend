@@ -15,7 +15,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {MessageService} from './message-service/message.service';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {SuggestionsComponent} from './suggestions/suggestions.component';
-
+import { ClipboardModule } from 'ngx-clipboard';
 
 import {GameTableComponent} from './game-table/game-table.component';
 import {DjangoClientService} from './django-client/django-client.service';
@@ -33,6 +33,8 @@ import {TokenInterceptorService} from './auth/token-interceptor.service';
 import {LogInToCommentComponent} from './log-in-to-comment/log-in-to-comment.component';
 import {SuggestionFormComponent} from './suggestion-form/suggestion-form.component';
 import { SuggestionCommentFormComponent } from './suggestion-comment-form/suggestion-comment-form.component';
+import { HighscoresComponent } from './highscores/highscores.component';
+import { ProfilePageLinkAccountComponent } from './profile-page-link-account/profile-page-link-account.component';
 
 @NgModule({
   imports: [
@@ -42,6 +44,7 @@ import { SuggestionCommentFormComponent } from './suggestion-comment-form/sugges
     HttpClientModule,
     NgbModule.forRoot(),
     ChartsModule,
+    ClipboardModule,
   ],
   providers: [
     MessageService,
@@ -73,6 +76,8 @@ import { SuggestionCommentFormComponent } from './suggestion-comment-form/sugges
     LogInToCommentComponent,
     SuggestionFormComponent,
     SuggestionCommentFormComponent,
+    HighscoresComponent,
+    ProfilePageLinkAccountComponent,
   ],
   bootstrap: [AppComponent]
 })

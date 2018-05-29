@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
 
 
   registerUserData = {
+    'email': '',
+    'username': '',
     'password': '',
     'password1': '',
   };
@@ -22,6 +24,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+
   }
 
   registerUser() {

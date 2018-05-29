@@ -9,6 +9,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfilePageComponent} from './profile-page/profile-page.component';
 import {AuthGuard} from './auth/auth.guard';
+import {HighscoresComponent} from './highscores/highscores.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'suggestions', component: SuggestionsComponent},
   {path: 'blog/:id', component: BlogpostComponent},
   {path: 'blog', component: BlogpostsComponent},
+  {path: 'highscores', component: HighscoresComponent},
   {path: 'user/profile', component: ProfilePageComponent, canActivate: [AuthGuard]}
 
 ];

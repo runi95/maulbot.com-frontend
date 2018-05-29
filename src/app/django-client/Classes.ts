@@ -10,6 +10,7 @@ export class GameTable {
   getReadableTime: number;
   status: string;
   getActive: boolean;
+  copied = false;
 }
 
 export class Comment {
@@ -39,6 +40,26 @@ export class BlogDetail {
   comments: Comment[];
 }
 
+export class PlayerStats {
+  name: string;
+  total_lvl: number;
+  total_exp: number;
+  player: PlayerTrack[];
+}
+
+export class PlayerTrack {
+  name: string;
+  realm: string;
+  num_games: number;
+  linkedPlayer: LinkedPlayer[];
+}
+
+export class LinkedPlayer {
+  name: string;
+  username: string;
+  userid: number;
+}
+
 export class Suggestion {
   constructor(
     public pk: number,
@@ -48,7 +69,8 @@ export class Suggestion {
     public status: number,
     public submittedby: string,
     public approvedby: string,
-  ) { }
+  ) {
+  }
 }
 
 export class SuggestionDetail {
@@ -62,7 +84,8 @@ export class SuggestionDetail {
     public submittedby: string,
     public approvedby: string,
     public comments: Comment[],
-  ) { }
+  ) {
+  }
 }
 
 export class SuggestionForm {
@@ -70,7 +93,8 @@ export class SuggestionForm {
     public title: string,
     public text: string,
     public type: string,
-  ) { }
+  ) {
+  }
 }
 
 export class NewComment {
@@ -79,15 +103,16 @@ export class NewComment {
 
 
 export class SignUpError {
-  email: Array;
-  username: Array;
-  password: Array;
+  email: any[];
+  username: any[];
+  password: any[];
 
 }
+
 export class LoginError {
-  email: Array;
-  username: Array;
-  password: Array;
-  non_field_errors: Array;
+  email: any[];
+  username: any[];
+  password: any[];
+  non_field_errors: any[];
 
 }

@@ -30,7 +30,7 @@ export class SuggestionCommentFormComponent {
   }
 
   newComment() {
-    console.log(this.formComment);
+    // console.log(this.formComment);
     this.djangoClientService.newSuggestionComment(this.formComment, this.pk).subscribe((data: any) => {
       this.formComment = new NewComment();
       this.update.emit(this.pk);

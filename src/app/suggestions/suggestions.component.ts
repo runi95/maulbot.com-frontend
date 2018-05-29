@@ -22,7 +22,7 @@ export class SuggestionsComponent implements OnInit {
   commentUpdating = false;
 
   constructor(private modalService: NgbModal,
-              private _authService: AuthService,
+              public _authService: AuthService,
               private djangoClientService: DjangoClientService) {
   }
 
