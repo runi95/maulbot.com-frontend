@@ -1,0 +1,30 @@
+<app-admin-status-bar *ngIf="_authService.isAdmin()"></app-admin-status-bar>
+<div class="row">
+  <div class="col-12">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">MaulBot</h1>
+        <p class="lead text-muted">Welcome to the official maulbot website.</p>
+      </div>
+    </section>
+    <app-game-table></app-game-table>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-12">
+        <!-- Example Bar Chart Card-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-bar-chart"></i> Games ran
+          </div>
+          <div class="card-body">
+            <app-game-chart></app-game-chart>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

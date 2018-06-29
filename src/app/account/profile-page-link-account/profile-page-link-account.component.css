@@ -1,0 +1,22 @@
+.approved {
+  color: green;
+}
+
+.Unapproved {
+  color: red;
+}
+.avatarIMG {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  cursor: pointer;
+}
+.avatarIMG:hover {
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
+}
+
+.tooltip-inner {
+  max-width: 350px !important;
+  /* If max-width does not work, try using width instead */
+  width: 350px !important;
+}
